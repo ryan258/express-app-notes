@@ -146,6 +146,12 @@ app.get('/images', (req, res) => {
 
 For more routing methods [visit the express docs](http://expressjs.com/en/guide/routing.html)
 
+### Chaining Routes
+
+As your API grows you may need to refactor your code and chaining multiple methods into a single block of code for a specific path can do that.
+
+1. Get similar calls on the same paths
+
 ## Useful Tools
 
 - [mockaroo.com - for mocking up API data](https://www.mockaroo.com/)
