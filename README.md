@@ -23,3 +23,7 @@ $ DEBUG=myapp:* npm start
 ```
 
 **Howeverm in this course we'll be learning the ins and outs by building our express app from scratch.**
+
+## Useful Tools
+
+- [mockaroo.com - for mocking up API data](https://www.mockaroo.com/)
