@@ -88,6 +88,25 @@ Route handlers is the block of code that happens inside of your route.
 
 **BUT NOTE that you can only do one response method for a single call**
 
+```js
+app.get(
+  '/item/:id',
+  (req, res, next) => {
+    console.log(req.params.id)
+    let user = Number(req.params.id)
+    console.log(user)
+    console.log(data[user])
+    res.send(data[user])
+    // next allows us to go to the next callback function
+    next()
+  },
+  (req, res) => {
+    // next() jumped us into this function to continue running from 1 function to the next
+    console.log('did you get the right data?')
+  }
+)
+```
+
 ## Useful Tools
 
 - [mockaroo.com - for mocking up API data](https://www.mockaroo.com/)
