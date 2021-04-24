@@ -77,6 +77,17 @@ You can also have multiple params in a single path
 app.get('/item/:category/:id', (req, res) => {...})
 ```
 
+### Route Handlers
+
+Route handlers is the block of code that happens inside of your route.
+
+**next()** - A neat express function that allows us to handle multiple handlers in a single route call.
+
+- and you can do it multiple times in the same call
+- so this allows you to create your own middleware to do anything you'd like before or after
+
+**BUT NOTE that you can only do one response method for a single call**
+
 ## Useful Tools
 
 - [mockaroo.com - for mocking up API data](https://www.mockaroo.com/)

@@ -12,13 +12,20 @@ app.get('/', (req, res) => {
   res.json(data)
 })
 
-app.get('/item/:id', (req, res) => {
-  console.log(req.params.id)
-  let user = Number(req.params.id)
-  console.log(user)
-  console.log(data[user])
-  res.send(data[user])
-})
+app.get(
+  '/item/:id',
+  (req, res, next) => {
+    console.log(req.params.id)
+    let user = Number(req.params.id)
+    console.log(user)
+    console.log(data[user])
+    res.send(data[user])
+    next()
+  },
+  (req, res) => {
+    console.log('did you get the right data?')
+  }
+)
 
 app.post('/newItem', (req, res) => {
   res.send(`a post request with /newItem route on port ${PORT}`)
