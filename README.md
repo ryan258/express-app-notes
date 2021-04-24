@@ -107,6 +107,45 @@ app.get(
 )
 ```
 
+### Common Routing Methods
+
+There are multiple response types we can do like .send() and .json() to send responses to the browser.
+
+We can also render pure HTML by coding it directly into our response.
+
+**.json()** sends a data response to the client, ready to be consumed by front end code
+
+**.end()** ends a call right away, but usually you won't have a need for this
+
+```js
+app.get('/item', (req, res) => {
+  // ends the call right away
+  res.end()
+  res.send(`a get request with /item route on port ${PORT}`)
+  // ^^ the res.send() never runs
+})
+```
+
+**.redirect()** sends them to a given url
+
+```js
+app.get('/item', (req, res) => {
+  // redirect to another page
+  res.redirect('https://www.linkedin.com')
+})
+```
+
+**.download()** responds with a download
+
+```js
+app.get('/images', (req, res) => {
+  // respond to /images with a download
+  res.download('images/rocket.jpg')
+})
+```
+
+For more routing methods [visit the express docs](http://expressjs.com/en/guide/routing.html)
+
 ## Useful Tools
 
 - [mockaroo.com - for mocking up API data](https://www.mockaroo.com/)
