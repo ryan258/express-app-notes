@@ -53,6 +53,30 @@ app.use(express.static('public'))
 app.use('/images', express.static('images'
 ```
 
+## Routing with Express
+
+### Routing Parameters
+
+```js
+app.get('/item/:id', (req, res) => {
+  // the params will be on the req object
+  console.log(req.params.id)
+  // it's a string coming from a param and we need it to be a number for when we match it to an id in a DB
+  let user = Number(req.params.id)
+  console.log(user)
+  // so now we'll dig into a JSON file and grab the object in that array position
+  console.log(data[user])
+  // we'll send that JSON obj to the browser
+  res.send(data[user])
+})
+```
+
+You can also have multiple params in a single path
+
+```js
+app.get('/item/:category/:id', (req, res) => {...})
+```
+
 ## Useful Tools
 
 - [mockaroo.com - for mocking up API data](https://www.mockaroo.com/)
