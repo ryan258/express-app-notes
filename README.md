@@ -22,6 +22,20 @@ $ DEBUG=myapp:* npm start
 <!-- then go to http://localhost:3000/ -->
 ```
 
+## Routes
+
+The bread and butter of any application are routes.
+
+- They provide you with what data you requested
+  - **GET** - gets data from the server
+  - **POST** - posts data to the server
+  - **PUT** - basically an update to something on the server
+  - **DELETE** - delete something off the server
+- They follow a pattern of request and response
+  - **request** - the link you requested along with the method
+  - **response** - provides with the data
+- the **handler** is the block of code that runs when the route is called
+
 **Howeverm in this course we'll be learning the ins and outs by building our express app from scratch.**
 
 ## Useful Tools
