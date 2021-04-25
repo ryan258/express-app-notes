@@ -244,6 +244,84 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 Then you may want to clear the browser cache.
 
+## Advanced Topics in Express
+
+### Debugging in Express
+
+Setting up debugging in Express is actually very easy.
+
+From the terminal in your code editor
+**For Mac or Linux**
+
+```terminal
+$ DEBUG=express:* node index.js
+```
+
+**For Windows**
+
+```terminal
+$ set DEBUG=express:* & node index.js
+```
+
+But you can also just set this up in your package.json file.
+
+```json
+"scripts": {
+    "start": "nodemon ./index.js --exec babel-node -e js",
+    "debug": "DEBUG=express:* nodemon ./index.js --exec babel-node -e js",
+    "debug-windows": "set DEBUG=express:* & nodemon ./index.js --exec babel-node -e js"
+  },
+```
+
+### Express Behind a Proxy
+
+[Express behind proxies docs](https://expressjs.com/en/guide/behind-proxies.html)
+
+A **proxy** is basically another server that pushes endpoint calls or traffic to your app.
+
+Setting up proxies in Express is easy! It's just a single line with options and args.
+
+But there are a lot of things and concerns that go into it to maintain proper security. So if you're going to use them, make sure you review some security courses on Node.js and Express.
+
+```js
+// whatever IP addresses you decide to use, you need to make sure they're secure
+app.set('trust proxy', 'loopback, 123.123.123.123') // specify a single subnet
+```
+
+### Security Overview for Express - Best Practices
+
+- Always keep dependencies up to date and secure
+  - follow official lists promoted by the Express team or internal ones
+  - if any of them are depricated, remove them or find options
+- if using sensetive data, use TLS (transport layer security) which is the next progression of SSL
+- use Helmet's collection of security middleware
+- use cookies securely
+  - as a base use the Express session middleware when you want to manage cookies in your app
+- Look at [Node Security Checklist](https://blog.risingstack.com/node-js-security-checklist/) and stay informed of known issues
+
+### Real-time Web w/ Express
+
+[socket-io](https://socket.io/)
+
+Socket uses an event-based approach for syncing and transmitting data in real-time.
+
+- it uses events
+- then subscribes to those events
+
+If some one types a message in a chatroom, then everyone in that chatroom is updated with that message information.
+
+[See the demo section](https://socket.io/demos/chat/)
+
+There's also a LL course called Node.js: Real-Time Web w/ Socket.io
+It's also worth learning about JWT - security features for APIs
+
 ## Useful Tools
 
 - [mockaroo.com - for mocking up API data](https://www.mockaroo.com/)
+- [letsencrypt - get a free TLS certificate](https://www.nginx.com/blog/using-free-ssltls-certificates-from-lets-encrypt-with-nginx/)
+
+## Other Options
+
+- Koa
+- Hapi
+- Sails
