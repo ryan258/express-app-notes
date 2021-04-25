@@ -152,6 +152,98 @@ As your API grows you may need to refactor your code and chaining multiple metho
 
 1. Get similar calls on the same paths
 
+## Express & Middleware
+
+### Basic Middleware w/ Express
+
+**Middleware** is simply functions that have access to the request and response cycle in an Express app and can run their code there.
+
+- It can make changes to the request and response object
+- Can call another function in the stack w/ .next()
+- Basically adding own code before sending a response back
+
+**express.JSON()** allows us to parse JSON POST commands, meaning that when a form or the front end wants to send new data to the server and databaseand send it in JSON, we need our server to be able to use it in this format and then POST it to the database.
+
+- It's Express' version of body-parser
+
+```js
+// method to use JSON
+//app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
+
+// this is for images folder on path images
+app.use('/images', express.static('images'))
+
+app.get('/', (req, res) =>
+  // get data first
+  res.json(data)
+)
+
+// JSON data
+// { "hello": "JSON is cool"}
+
+// URLEncoded data
+// hello=URLEncoded+is+cool
+```
+
+### Error Handling
+
+Handling errors must be last in your middleware logic after app.use() and route calls. Put it after the last app.route() or app.listen()
+
+If there's an error Express will look for a custom error handler and if there isn't one it will fallback on its stack error handling.
+
+```js
+app
+  .route('/item')
+  .get((req, res) => {
+    // res.send(`a get request with /item route on port ${PORT}`)
+    throw new Error()
+  })
+  .post((req, res) => res.send(`a post request with /item route on port ${PORT}`))
+  .put((req, res) => res.send(`a put request with /item route on port ${PORT}`))
+  .delete((req, res) => res.send(`a delete request with /item route on port ${PORT}`))
+
+// Error Handling Function
+// if we don't express our error handling function Express will fall back on its stock error handling.
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  // customize the error handling
+  res.status(500).send(`Red alert! ${err.stack}`)
+})
+
+app.listen(PORT, () => {
+  console.log(`Your server is running on port ${PORT}`)
+  console.log(data)
+})
+```
+
+### 3rd Party Middleware
+
+- [Express Middleware list on expressjs.com](http://expressjs.com/en/resources/middleware.html)
+- [serve-favicon middleware](http://expressjs.com/en/resources/middleware/serve-favicon.html)
+
+For this example we'll use the serve-favicon middleware.
+
+```cmd
+$ npm i serve-favicon
+```
+
+Import the middleware into index.js
+
+```js
+import favicon from 'serve-favicon'
+import path from 'path'
+```
+
+Use serve-favicon to serve our favicon
+
+```js
+// use serve-favicon
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
+```
+
+Then you may want to clear the browser cache.
+
 ## Useful Tools
 
 - [mockaroo.com - for mocking up API data](https://www.mockaroo.com/)
